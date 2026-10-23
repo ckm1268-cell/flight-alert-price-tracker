@@ -1,4 +1,4 @@
-# Flight Alert Tracker
+# Flight Alert Price Tracker
 
 Multi-user flight fare alert PWA. **LIVE DATA → VALIDATE → COMPARE → ALERT → ACTION.**
 Static UI on GitHub Pages, Supabase (Postgres + RLS + magic-link auth), scheduled backend on GitHub Actions, email via Resend, in-browser alerts.
