@@ -1,0 +1,26 @@
+name: Deploy Pages
+on:
+  push:
+    branches: [main]
+    paths: ['frontend/**', '.github/workflows/pages.yml', '.github/scripts/**']
+  workflow_dispatch:
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: '${{ steps.dep.outputs.page_url }}' }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write public config (publishable key only)
+        run: |
+          cat > frontend/config.js <<EOF
+          window.APP_CONFIG = { SUPABASE_URL: '${{ vars.SUPABASE_URL }}', SUPABASE_PUBLISHABLE_KEY: '${{ vars.SUPABASE_PUBLISHABLE_KEY }}' };
+          EOF
+      - name: Cache-bust asset URLs and shell version
+        run: python3 .github/scripts/cache_bust_frontend.py "${GITHUB_SHA::7}"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: frontend }
+      - id: dep
+        uses: actions/deploy-pages@v4

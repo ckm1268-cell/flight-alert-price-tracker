@@ -1,0 +1,9 @@
+{
+  "_comment": "SYNTHETIC fixture shaped after the Travelpayouts prices_for_dates docs. NOT a real capture. Replace with a real captured response after the first CI run with a real token.",
+  "success": true,
+  "currency": "myr",
+  "data": [
+    { "origin": "KUL", "destination": "CAN", "price": 1450, "airline": "AK", "flight_number": 128, "transfers": 0, "departure_at": "2026-12-10T08:15:00+08:00", "return_at": "2026-12-14T19:00:00+08:00", "link": "/search/KUL1012CAN14121", "found_at": "2026-10-23T06:00:00Z" },
+    { "origin": "KUL", "destination": "CAN", "price": 1290, "airline": "MH", "flight_number": 380, "transfers": 1, "departure_at": "2026-12-10T11:00:00+08:00", "return_at": "2026-12-14T21:00:00+08:00", "link": "/search/KUL1012CAN14121b", "found_at": "2026-10-23T05:00:00Z" }
+  ]
+}

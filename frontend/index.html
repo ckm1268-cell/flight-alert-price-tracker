@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b5fff">
+  <title>Flight Alert Tracker</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>✈️ Flight Alert Tracker</h1>
+    <div id="auth-box"></div>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main>
+    <section class="card" id="create-card">
+      <h2>New alert</h2>
+      <p id="lock-note" class="note">Sign in to create alerts.</p>
+      <form id="alert-form" autocomplete="off">
+        <fieldset id="form-fields" disabled>
+          <div class="row">
+            <label>From (IATA)<input id="origin" maxlength="3" placeholder="KUL" required></label>
+            <label>To (IATA)<input id="destination" maxlength="3" placeholder="CAN" required></label>
+          </div>
+          <div class="row">
+            <label>Depart<input id="depart" type="date" required></label>
+            <label>Return <small>(blank = one-way)</small><input id="return" type="date"></label>
+          </div>
+          <div class="row">
+            <label>Currency
+              <select id="currency"><option value="myr">MYR</option><option value="usd">USD</option><option value="sgd">SGD</option><option value="cny">CNY</option></select>
+            </label>
+            <label>Alert me when price is
+              <select id="condition"><option value="<=">at or below</option><option value="<">below</option><option value=">=">at or above</option><option value=">">above</option></select>
+            </label>
+            <label>Target price<input id="target" type="number" min="1" step="1" required></label>
+          </div>
+          <div class="checks">
+            <label><input type="checkbox" id="src-travelpayouts" checked> Travelpayouts <span class="badge cached">CACHED</span></label>
+            <label><input type="checkbox" id="src-scraped" disabled> Scraped OTA <span class="badge">disabled until set up</span></label>
+          </div>
+          <div class="checks">
+            <label><input type="checkbox" id="n-browser" checked> Browser alert (tab/PWA must be open)</label>
+            <label><input type="checkbox" id="n-email" checked> Email</label>
+          </div>
+          <button class="primary" type="submit" id="save-btn">Start monitoring</button>
+        </fieldset>
+      </form>
+      <p class="note">Prices from Travelpayouts are <b>cached fares</b> found by other searches — not confirmed live seats. Always verify before booking.</p>
+    </section>
+
+    <section id="alerts"></section>
+  </main>
+
+  <dialog id="chart-dialog"><div id="chart-body"></div><button id="chart-close">Close</button></dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="shared/shared.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

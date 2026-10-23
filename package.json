@@ -1,0 +1,9 @@
+{
+  "name": "flight-alert-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-user flight fare alert PWA: GitHub Pages + Supabase + GitHub Actions",
+  "scripts": { "test": "node --test tests/*.test.js", "run:mock": "MOCK=1 node backend/scheduler/run.js" },
+  "engines": { "node": ">=20" },
+  "optionalDependencies": { "playwright": "^1.48.0" }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Flight Alert Tracker",
+  "short_name": "FlightAlerts",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0e1424",
+  "theme_color": "#0b5fff",
+  "icons": []
+}

@@ -1,0 +1,14 @@
+{
+  "id": "travelpayouts",
+  "name": "Travelpayouts Data API (cached fares)",
+  "extractionMethod": "JSON",
+  "requiresBrowserAutomation": false,
+  "dataKind": "CACHED",
+  "endpoint": "https://api.travelpayouts.com/aviasales/v3/prices_for_dates",
+  "auth": "X-Access-Token header (secret TRAVELPAYOUTS_TOKEN)",
+  "maxFareAgeHours": 48,
+  "validation": { "myr": { "min": 30, "max": 60000 }, "usd": { "min": 10, "max": 15000 } },
+  "notes": "Fares are found by other users' searches and cached. They are NOT live inventory. UI must show CACHED badge. Response shape taken from public docs; confirm on first real CI run with a real token.",
+  "complianceReviewed": "API with free token, intended for this use. Re-read Travelpayouts terms before heavy polling.",
+  "lastVerified": null
+}

@@ -1,0 +1,16 @@
+{
+  "id": "scraped_ota",
+  "name": "Scraped OTA / airline page (template — DISABLED)",
+  "enabled": false,
+  "extractionMethod": "DOM",
+  "requiresBrowserAutomation": true,
+  "dataKind": "LIVE",
+  "url": "https://REPLACE-AFTER-DISCOVERY.example/search?from={origin}&to={destination}&depart={departDate}&return={returnDate}",
+  "waitForSelector": "REPLACE",
+  "priceSelector": "REPLACE",
+  "airlineSelector": null,
+  "maxFareAgeHours": 1,
+  "validation": { "myr": { "min": 30, "max": 60000 } },
+  "notes": "DO NOT ENABLE until discovery is recorded here: (1) price in raw HTML or JS-filled? (2) unauthenticated JSON endpoint the page calls? (3) CAPTCHA/login? (4) robots.txt result (a 404 is not a green light) (5) Terms of Use read by a human (6) official API alternative. Never bypass CAPTCHA, login or anti-bot controls.",
+  "lastVerified": null
+}
