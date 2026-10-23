@@ -149,3 +149,13 @@ test('shared helpers', () => {
   assert.equal(S.formatPrice(1290, 'myr'), '1,290 MYR'); assert.equal(S.formatPrice(null, 'myr'), '—');
   assert.equal(S.timeAgo('2026-10-23T07:00:00Z', NOW), '1 h ago'); assert.equal(S.timeAgo(null), 'never');
 });
+
+test('sendEmail sends once to owner + extra recipients, de-duplicated', async () => {
+  const msg = buildMessage({ origin: 'KUL', destination: 'URC', depart_date: '2027-06-13', return_date: '2027-06-25', currency: 'myr', condition: '<=', target_price: 2300 },
+    { price: 2100, dataKind: 'CACHED', source: 'travelpayouts', retrievedAt: 'x' });
+  let body;
+  const r = await sendEmail({ to: ['ckm1268@gmail.com', 'LYN1268@gmail.com', 'lyn1268@gmail.com', null], message: msg, apiKey: 'k',
+    fetchImpl: async (u, o) => { body = JSON.parse(o.body); return { ok: true }; } });
+  assert.equal(r.ok, true);
+  assert.deepEqual(body.to, ['ckm1268@gmail.com', 'lyn1268@gmail.com']);
+});

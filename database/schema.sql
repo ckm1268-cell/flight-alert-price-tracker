@@ -19,6 +19,8 @@ create table if not exists public.alerts (
   updated_at timestamptz not null default now()
 );
 
+alter table public.alerts add column if not exists extra_emails text[] not null default '{}';
+
 create table if not exists public.prices (
   id bigserial primary key,
   source text not null,

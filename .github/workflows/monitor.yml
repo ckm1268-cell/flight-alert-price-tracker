@@ -1,7 +1,7 @@
 name: Price monitor
 on:
   schedule:
-    - cron: '*/30 * * * *'   # best-effort; see README for optional external cron via workflow_dispatch
+    - cron: '*/10 * * * *'   # best-effort (GitHub may delay runs under load); see README for optional external cron via workflow_dispatch
   workflow_dispatch:
 concurrency:
   group: monitor

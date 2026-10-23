@@ -24,12 +24,13 @@ function buildMessage(alert, reading) {
 /** Email via Resend REST API. Key stays server-side (Actions secret). */
 async function sendEmail({ to, message, apiKey, from, fetchImpl = fetch }) {
   if (!apiKey) return { ok: false, error: 'RESEND_API_KEY not set' };
-  if (!to) return { ok: false, error: 'no recipient' };
+  const recipients = [...new Set([].concat(to || []).map((e) => String(e || '').trim().toLowerCase()).filter(Boolean))];
+  if (!recipients.length) return { ok: false, error: 'no recipient' };
   try {
     const res = await fetchImpl('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: from || 'Flight Alerts <onboarding@resend.dev>', to: [to], subject: message.subject, text: message.text, html: message.html }),
+      body: JSON.stringify({ from: from || 'Flight Alerts <onboarding@resend.dev>', to: recipients, subject: message.subject, text: message.text, html: message.html }),
     });
     if (!res.ok) return { ok: false, error: 'Resend HTTP ' + res.status + ' ' + (await res.text()).slice(0, 200) };
     return { ok: true };

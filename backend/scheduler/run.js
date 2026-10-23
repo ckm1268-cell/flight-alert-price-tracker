@@ -108,7 +108,8 @@ async function run(env = process.env, deps = {}) {
     if (dry || mock) continue;
     let delivery = 'skipped';
     if (alert.notify_email) {
-      const to = await db.userEmail(alert.user_id).catch(() => null);
+      const owner = await db.userEmail(alert.user_id).catch(() => null);
+      const to = [owner, ...(alert.extra_emails || [])].filter(Boolean); // owner + extra recipients, de-duplicated in sendEmail
       const r = await sendEmail({ to, message: msg, apiKey: env.RESEND_API_KEY, from: env.RESEND_FROM });
       delivery = r.ok ? 'sent' : 'failed: ' + r.error;
     }
