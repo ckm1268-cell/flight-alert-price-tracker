@@ -1,5 +1,5 @@
 {
-  "name": "Flight Alert Tracker",
+  "name": "Flight Alert Price Tracker",
   "short_name": "FlightAlerts",
   "start_url": "./",
   "display": "standalone",
