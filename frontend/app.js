@@ -178,6 +178,18 @@
     setLocked(true);
     renderAuth();
     $('alert-form').addEventListener('submit', saveAlert);
+    // Picking a departure date auto-fills Return = Depart + 1 day (clear it afterwards for one-way).
+    function nextDay(iso) {
+      const d = new Date(iso + 'T00:00:00Z'); // UTC math avoids timezone/DST off-by-one
+      d.setUTCDate(d.getUTCDate() + 1);
+      return d.toISOString().slice(0, 10);
+    }
+    $('depart').addEventListener('change', () => {
+      const dep = $('depart').value;
+      if (!dep) return;
+      $('return').min = nextDay(dep);
+      $('return').value = nextDay(dep);
+    });
     $('alerts').addEventListener('click', onAction);
     $('chart-close').onclick = () => $('chart-dialog').close();
     if (!configured) {
